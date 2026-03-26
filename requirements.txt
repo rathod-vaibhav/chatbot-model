@@ -8,3 +8,6 @@ sentence-transformers
 chromadb
 fastapi
 uvicorn
+requests
+python-dotenv
+langchain-groq
