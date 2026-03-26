@@ -29,7 +29,28 @@ def build_vectorstore(documents):
     return db
 
 
-# ---------- LOAD (USED BY CHATBOT) ----------
+# # ---------- LOAD (USED BY CHATBOT) ----------
+# def get_vectorstore():
+#     global _vectorstore
+
+#     if _vectorstore is None:
+#         print("⚡ Loading vector DB into memory...")
+
+#         _vectorstore = Chroma(
+#             persist_directory=PERSIST_DIR,
+#             embedding_function=_embeddings()
+#         )
+
+#         # sanity check
+#         if _vectorstore._collection.count() == 0:
+#             raise Exception(
+#                 "Vector DB is empty! Run build_vectorstore() first."
+#             )
+
+#     return _vectorstore
+
+_vectorstore = None
+
 def get_vectorstore():
     global _vectorstore
 
@@ -40,11 +61,5 @@ def get_vectorstore():
             persist_directory=PERSIST_DIR,
             embedding_function=_embeddings()
         )
-
-        # sanity check
-        if _vectorstore._collection.count() == 0:
-            raise Exception(
-                "Vector DB is empty! Run build_vectorstore() first."
-            )
 
     return _vectorstore

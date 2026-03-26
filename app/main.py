@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, EmailStr
 from app.chatbot import ask_ai
 from fastapi.middleware.cors import CORSMiddleware
+from app.vector_store import get_vectorstore
 
 app = FastAPI()
 
@@ -27,6 +28,11 @@ class ContactRequest(BaseModel):
     subject: str
     message: str
 
+
+@app.on_event("startup")
+def startup_event():
+    print("🔥 Preloading vector DB...")
+    get_vectorstore()
 
 @app.post("/ask")
 def ask_question(data: Query):
