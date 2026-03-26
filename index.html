@@ -2776,7 +2776,7 @@
       btn.textContent = 'Sending…'; btn.disabled = true;
 
       try {
-        const res = await fetch('http://127.0.0.1:8000/contact', {
+        const res = await fetch('https://chatbot-model-uyuz.onrender.com/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
@@ -2955,7 +2955,7 @@
       input.value = '';
       showTypingIndicator();
       try {
-        const res = await fetch('http://127.0.0.1:8000/ask', {
+        const res = await fetch('https://chatbot-model-uyuz.onrender.com/ask', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query: text })
