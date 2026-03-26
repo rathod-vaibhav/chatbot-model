@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+venv/
+env/
+.agents/
+.agent/
+_agents/
+_agent/
+brain/
+*.log
