@@ -128,7 +128,7 @@ def handle_contact(data: ContactRequest):
         raise HTTPException(status_code=500, detail=f"Failed to send email: {str(e)}")
 
 
-# At the bottom:
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000)
+# # At the bottom:
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", host="0.0.0.0", port=8000)

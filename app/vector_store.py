@@ -1,8 +1,6 @@
 from pathlib import Path
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
-
-from pathlib import Path
+from .embeddings import get_embeddings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PERSIST_DIR = str(BASE_DIR / "vector_db")
@@ -10,13 +8,18 @@ PERSIST_DIR = str(BASE_DIR / "vector_db")
 _vectorstore = None
 
 
-def _embeddings():
-    return HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
-
-
 # ---------- BUILD (RUN MANUALLY) ----------
+
+def build_vectorstore(chunks):
+    print(f"📦 Creating vector DB with {len(chunks)} chunks...")
+    vectorstore = Chroma.from_documents(
+        documents=chunks,
+        embedding=get_embeddings(),
+        persist_directory=PERSIST_DIR
+    )
+    print("✅ Vector DB built and persisted.")
+    return vectorstore
+
 
 def get_vectorstore():
     global _vectorstore
@@ -26,7 +29,7 @@ def get_vectorstore():
 
         _vectorstore = Chroma(
             persist_directory=PERSIST_DIR,
-            embedding_function=_embeddings()
+            embedding_function=get_embeddings()
         )
 
     return _vectorstore
