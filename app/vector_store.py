@@ -17,39 +17,6 @@ def _embeddings():
 
 
 # ---------- BUILD (RUN MANUALLY) ----------
-def build_vectorstore(documents):
-    db = Chroma.from_documents(
-        documents,
-        embedding=_embeddings(),
-        persist_directory=PERSIST_DIR
-    )
-
-    print("✅ Vector DB built with", len(documents), "documents")
-
-    return db
-
-
-# # ---------- LOAD (USED BY CHATBOT) ----------
-# def get_vectorstore():
-#     global _vectorstore
-
-#     if _vectorstore is None:
-#         print("⚡ Loading vector DB into memory...")
-
-#         _vectorstore = Chroma(
-#             persist_directory=PERSIST_DIR,
-#             embedding_function=_embeddings()
-#         )
-
-#         # sanity check
-#         if _vectorstore._collection.count() == 0:
-#             raise Exception(
-#                 "Vector DB is empty! Run build_vectorstore() first."
-#             )
-
-#     return _vectorstore
-
-_vectorstore = None
 
 def get_vectorstore():
     global _vectorstore
